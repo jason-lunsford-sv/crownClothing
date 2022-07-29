@@ -14,7 +14,7 @@ const ProductCard = ({
 
     const handleClick = () => {
         addItemToCart(data)
-    }
+    };
 
     return (
         <div className="product-card-container">
