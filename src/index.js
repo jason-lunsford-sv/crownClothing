@@ -7,7 +7,6 @@ import App from './App';
 
 import { store } from './store/store';
 
-import { CategoriesProvider } from './contexts/categories.context';
 import { CartProvider } from './contexts/cart.context';
 
 import reportWebVitals from './reportWebVitals';
@@ -19,11 +18,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <CategoriesProvider>
-          <CartProvider>
-            <App />
-          </CartProvider>
-        </CategoriesProvider>
+        <CartProvider>
+          <App />
+        </CartProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
