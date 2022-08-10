@@ -2,9 +2,10 @@ import { compose, legacy_createStore as createStore, applyMiddleware } from 'red
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 
 import { rootReducer } from './root-reducer';
+import { rootSaga } from './root-saga';
 
 // Redux Persist init config
 const persistConfig = {
@@ -13,6 +14,8 @@ const persistConfig = {
     whitelist: ['cart']  // just persist this store slice
 };
 
+const sagaMiddleware = createSagaMiddleware();
+
 // Create persistedReducer, this allows us to rehydrate the reducers from local storage
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -20,7 +23,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 // Note: by passing "Boolean" to filter we are removing falsey array values,
 // which can occur in this case if the node environment is set to
 // "production" (which would also prevent the logger middleware from loading).
-const middleWares = [process.env.NODE_ENV !== 'production' && logger, thunk].filter(Boolean);
+const middleWares = [process.env.NODE_ENV !== 'production' && logger, sagaMiddleware].filter(Boolean);
 
 const composedEnhancer = (process.env.NODE_ENV !== 'production' && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -31,3 +34,5 @@ const composedEnhancers = composedEnhancer(applyMiddleware(...middleWares));
 
 export const store = createStore(persistedReducer, undefined, composedEnhancers);
 export const persistor = persistStore(store);
+
+sagaMiddleware.run(rootSaga);
