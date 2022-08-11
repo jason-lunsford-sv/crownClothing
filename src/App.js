@@ -2,10 +2,6 @@ import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import {
-  getCurrentUser
-} from './utils/firebase/firebase.utils';
-
 import { checkUserSession } from './store/user/user.action';
 
 import Navigation from './routes/navigation/navigation.component';
@@ -19,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(checkUserSession());
-  }, []);
+  }, [dispatch]);
 
   return(
     <Routes>
