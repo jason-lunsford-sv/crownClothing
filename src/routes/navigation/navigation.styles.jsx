@@ -11,8 +11,13 @@ export const NavigationContainer = styled.div`
 
 export const LogoContainer = styled(Link)`
   height: 100%;
-  width: 70px;
+  width: 295px;
   padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 { margin: 0 }
 `;
 
 export const NavLinks = styled.div`
@@ -26,4 +31,8 @@ export const NavLinks = styled.div`
 export const NavLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
+`;
+
+export const Welcome = styled.span`
+  padding: 10px 15px;
 `;
