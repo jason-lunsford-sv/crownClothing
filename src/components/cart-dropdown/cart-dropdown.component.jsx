@@ -20,7 +20,7 @@ const CartDropdown = () => {
 
     const handleClick = () => {
         dispatch(setCartOpen());
-        navigate('/checkout');
+        navigate('/cart');
     }
 
     return (
